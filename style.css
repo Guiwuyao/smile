@@ -70,3 +70,27 @@ button:active {
     opacity: 0;
     pointer-events: none;
 }
+/* ... 前面的代码不变 ... */
+
+/* 新增：图片容器样式 */
+.image-container {
+    margin-top: 25px; /* 和上面的文字框拉开点距离 */
+    transition: opacity 0.5s; /* 让出现过程丝滑一点 */
+    display: flex;
+    justify-content: center;
+}
+
+/* 新增：图片本身的样式 */
+.image-container img {
+    max-width: 100%; /* 宽度最多占满容器 */
+    max-height: 250px; /* 高度限制一下，别太高 */
+    border-radius: 15px; /* 圆角看起来更可爱 */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* 加点阴影更有立体感 */
+}
+
+/* 确保 hidden 类对图片容器也生效 */
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+    /* 如果图片占位太大，可以加上 display: none，但为了动画效果先只用 opacity */
+}

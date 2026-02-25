@@ -1,3 +1,4 @@
+// 1. 文字文案数组
 const messages = [
     "不管发生什么，丞相还在！💪",
     "你笑起来的样子最好看了，快笑一个！😊",
@@ -15,32 +16,69 @@ const messages = [
 	"把不开心的事都留在昨天吧，今天是个崭新的你。🌅"
 ];
 
+// 2. 新增：表情包图片文件名数组
+// 【重要】请把这里换成你实际放入文件夹的图片文件名
+const memeImages = [
+    "gifs/meme_1.gif",
+    "gifs/meme_2.gif",
+    "gifs/meme_3.gif",
+    "gifs/meme_4.gif",
+    "gifs/meme_5.gif",
+    "gifs/meme_6.gif",
+    "gifs/meme_7.gif",
+    "gifs/meme_8.gif",
+    "gifs/meme_9.gif",
+    "gifs/meme_10.gif",
+    "gifs/meme_11.gif",
+    "gifs/meme_12.gif",
+    "gifs/meme_13.gif",
+    "gifs/meme_14.gif",
+    "gifs/meme_15.gif",
+    "gifs/meme_16.gif",
+    "gifs/meme_17.gif"
+];
+
+// 获取HTML里的元素
 const btn = document.getElementById('magicBtn');
 const messageBox = document.getElementById('messageBox');
-const bgMusic = document.getElementById('bgMusic'); // 新增：获取音乐元素
+const bgMusic = document.getElementById('bgMusic');
+const imageContainer = document.getElementById('imageContainer');
+const memeImageEl = document.getElementById('memeImage');
 
-// 设置音量，0.5代表50%的音量，你可以自己调整
-bgMusic.volume = 0.5; 
+// 设置音量
+if (bgMusic) {
+    bgMusic.volume = 0.5;
+}
 
 btn.addEventListener('click', () => {
-    // 新增：播放音乐 (如果还没在播放的话)
-    if (bgMusic.paused) {
-        bgMusic.play();
+    // --- 1. 播放音乐 ---
+    if (bgMusic && bgMusic.paused) {
+        bgMusic.play().catch(e => console.log("等待用户交互后播放音乐"));
     }
 
-    // 触发彩纸特效
-    confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.6 },
-        colors: ['#ff7eb3', '#ff758c', '#ffd700', '#00bcd4']
-    });
+    // --- 2. 触发彩纸特效 ---
+    if (typeof confetti === 'function') {
+        confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.6 },
+            colors: ['#ff7eb3', '#ff758c', '#ffd700', '#00bcd4']
+        });
+    }
 
-    // 随机抽取一句话
-    const randomIndex = Math.floor(Math.random() * messages.length);
-    
-    // 显示句子
-    messageBox.textContent = messages[randomIndex];
+    // --- 3. 随机抽取并显示文字 (已修复Bug ✅) ---
+    const textIndex = Math.floor(Math.random() * messages.length);
+    messageBox.textContent = messages[textIndex];
     messageBox.classList.remove('hidden');
     messageBox.style.opacity = '1';
+
+    // --- 4. 随机抽取并显示图片 ---
+    if (memeImages.length > 0) {
+        const imgIndex = Math.floor(Math.random() * memeImages.length);
+        memeImageEl.src = memeImages[imgIndex];
+        imageContainer.classList.remove('hidden');
+        setTimeout(() => {
+            imageContainer.style.opacity = '1';
+        }, 10);
+    }
 });
