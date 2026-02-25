@@ -83,7 +83,7 @@ button:active {
 /* 新增：图片本身的样式 */
 .image-container img {
     max-width: 100%; /* 宽度最多占满容器 */
-    max-height: 250px; /* 高度限制一下，别太高 */
+    max-height: 180px; /* 高度限制一下，别太高 */
     border-radius: 15px; /* 圆角看起来更可爱 */
     box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* 加点阴影更有立体感 */
 }

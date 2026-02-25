@@ -47,7 +47,7 @@ const memeImageEl = document.getElementById('memeImage');
 
 // 设置音量
 if (bgMusic) {
-    bgMusic.volume = 0.5;
+    bgMusic.volume = 1;
 }
 
 btn.addEventListener('click', () => {
